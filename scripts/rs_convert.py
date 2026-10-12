@@ -268,7 +268,8 @@ def main():
             fm.append('date: ' + date)
         if last:
             fm.append('last_amended: ' + last)
-        fm += ['status: in_force', 'text_version: consolidated',
+        # in force at the snapshot date; older snapshots may have been repealed since
+        fm += ['status: ' + ('in_force' if snap >= '2024-01-01' else 'unknown'), 'text_version: consolidated',
                'source: ' + yq(src), 'archived_url: ' + yq(arch), 'snapshot_date: ' + snap,
                'retrieved: ' + TODAY]
         if r['truncated']:
